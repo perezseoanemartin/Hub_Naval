@@ -27,7 +27,7 @@ if "resultados_M" not in st.session_state:
     st.session_state["resultados_M"] = {i: None for i in range(12, 17)}
 if "resultados_L" not in st.session_state:
     filas_l = list(range(20, 29)) + list(range(32, 36)) + list(range(39, 64)) + list(range(67, 77)) + list(range(80, 82)) + list(range(85, 88)) + list(range(91, 96))
-    st.session_state["resultados_L"] = {i: None for i in filas_l} 
+    st.session_state["resultados_L"] = {i: None for i in filas_l}
 if "resultados_otros" not in st.session_state:
     st.session_state["resultados_otros"] = {i: {"MV": None, "ML": None, "MT": None} for i in range(99, 109)}
 if "resultados_nav" not in st.session_state:
@@ -69,7 +69,7 @@ for i in range(5):
     entradas_usuario[f"'Interfaz'!J{fila}"] = cols[5].number_input(f"J{fila}", value=0.00, key=f"J{fila}", label_visibility="collapsed")
     entradas_usuario[f"'Interfaz'!K{fila}"] = cols[6].selectbox(f"K{fila}", opciones_und_peso, key=f"K{fila}", label_visibility="collapsed")
     entradas_usuario[f"'Interfaz'!L{fila}"] = cols[7].selectbox(f"L{fila}", opciones_und_peso, key=f"L{fila}", label_visibility="collapsed")
-    
+
     with cols[8]:
         c1, c2 = st.columns([1, 1])
         if c1.button("Calc.", key=f"btn_b_{fila}"):
@@ -109,7 +109,7 @@ for titulo, celda_densidad, dens_defecto, fila_inicio, lista_tanques in seccione
         g_val = cols[2].number_input(f"G{fila}", value=0.00, key=f"G{fila}", label_visibility="collapsed")
         h_val = cols[3].selectbox(f"H{fila}", ["Igual", "Distinta"], key=f"H{fila}", label_visibility="collapsed")
         i_val = cols[4].number_input(f"I{fila}", value=0.00, format="%.4f", key=f"I{fila}", label_visibility="collapsed")
-        
+
         entradas_usuario[f"'Interfaz'!F{fila}"] = f_val
         entradas_usuario[f"'Interfaz'!G{fila}"] = g_val
         entradas_usuario[f"'Interfaz'!H{fila}"] = h_val
@@ -117,7 +117,7 @@ for titulo, celda_densidad, dens_defecto, fila_inicio, lista_tanques in seccione
             entradas_usuario[f"'Interfaz'!I{fila}"] = i_val
         entradas_usuario[f"'Interfaz'!J{fila}"] = cols[5].selectbox(f"J{fila}", opciones_und_peso, key=f"J{fila}", label_visibility="collapsed")
         entradas_usuario[f"'Interfaz'!K{fila}"] = cols[6].selectbox(f"K{fila}", opciones_und_vol, key=f"K{fila}", label_visibility="collapsed")
-        
+
         with cols[7]:
             c1, c2 = st.columns([1, 1])
             if c1.button("Calc.", key=f"btn_sec_{fila}"):
@@ -140,15 +140,15 @@ for i in range(10):
     fila = 99 + i
     cols = st.columns([1.5, 1, 1, 1, 1, 1, 1, 1, 1.2])
     cols[0].markdown(f"<div style='padding-top: 10px; font-size:14px;'>Peso Nº {i+1}</div>", unsafe_allow_html=True)
-    
+
     peso = cols[1].number_input(f"F{fila}", value=None, format="%.2f", key=f"F{fila}", label_visibility="collapsed")
-    vcg = cols[2].number_input(f"G{fila}", value=None, format="%.2f", key=f"G{fila}", label_visibility="collapsed")
-    ph_mv = cols[3].empty() 
-    lcg = cols[4].number_input(f"I{fila}", value=None, format="%.2f", key=f"I{fila}", label_visibility="collapsed")
-    ph_ml = cols[5].empty() 
-    tcg = cols[6].number_input(f"K{fila}", value=None, format="%.2f", key=f"K{fila}", label_visibility="collapsed")
-    ph_mt = cols[7].empty() 
-    
+    vcg  = cols[2].number_input(f"G{fila}", value=None, format="%.2f", key=f"G{fila}", label_visibility="collapsed")
+    ph_mv = cols[3].empty()
+    lcg  = cols[4].number_input(f"I{fila}", value=None, format="%.2f", key=f"I{fila}", label_visibility="collapsed")
+    ph_ml = cols[5].empty()
+    tcg  = cols[6].number_input(f"K{fila}", value=None, format="%.2f", key=f"K{fila}", label_visibility="collapsed")
+    ph_mt = cols[7].empty()
+
     fila_completa = (peso is not None) and (vcg is not None) and (lcg is not None) and (tcg is not None)
     if fila_completa:
         entradas_usuario[f"'Interfaz'!F{fila}"] = peso
@@ -164,7 +164,7 @@ for i in range(10):
                     st.session_state["resultados_otros"][fila]["MV"] = sol[f"'Interfaz'!H{fila}"].value[0, 0]
                     st.session_state["resultados_otros"][fila]["ML"] = sol[f"'Interfaz'!J{fila}"].value[0, 0]
                     st.session_state["resultados_otros"][fila]["MT"] = sol[f"'Interfaz'!L{fila}"].value[0, 0]
-                
+
     if st.session_state["resultados_otros"][fila]["MV"] is not None:
         ph_mv.success(f"{st.session_state['resultados_otros'][fila]['MV']:.2f}")
     if st.session_state["resultados_otros"][fila]["ML"] is not None:
@@ -179,19 +179,19 @@ st.markdown("---")
 st.header("10. Navegación")
 
 lista_puertos = [
-    "Otro", "Aarhus", "Abiyán", "Alejandría", "Algeciras", "Amberes", "Anchorage", "Ashdod", "Auckland", 
-    "Balboa", "Bangkok", "Barcelona", "Bilbao", "Bremen/Bremerhaven", "Brisbane", "Buenos Aires", "Busan", 
-    "Calcuta", "Callao", "Cartagena", "Chennai", "Chittagong", "Ciudad del Cabo", "Colombo", "Colón", 
-    "Dakar", "Durban", "El Pireo", "Estambul", "Felixstowe", "Fremantle", "Gdansk", "Génova", "Gioia Tauro", 
-    "Gotemburgo", "Guangzhou", "Guayaquil", "Haifa", "Halifax", "Hamburgo", "Ho Chi Minh", "Hong Kong", 
-    "Honolulu", "Houston", "Incheon", "Jakarta", "Jebel Ali (Dubai)", "Jeddah", "Kaohsiung", "Karachi", "Kobe", 
-    "La Spezia", "Laem Chabng", "Lagos", "Las Palmas", "Le Havre", "Lianyungang", "Lisboa", "Londres Gateway", 
-    "Long Beach", "Los Angeles", "Manila", "Manzanillo (México)", "Marsella", "Melbourne", "Mersin", "Miami", 
-    "Mombasa", "Montevideo", "Montreal", "Mundra", "Nagoya", "Nhava Sheva (Mumbai)", "Novorossiysk", 
-    "Nueva York / Nueva Jersey", "Oakland", "Osaka", "Penang", "Port Klang", "Port Said", "Qingdao", 
-    "Rotterdam", "Salalah", "San Antonio", "San Petersburgo", "Santos", "Savannah", "Seattle", "Shanghai", 
-    "Sines", "Singapur", "Southampton", "Surabaya", "Sydney", "Tanger Med", "Tanjung Pelepas", 
-    "Tanjung Priok (Yakarta)", "Tauranga", "Tenerife", "Tianjin", "Tokio", "Trieste", "Valencia", 
+    "Otro", "Aarhus", "Abiyán", "Alejandría", "Algeciras", "Amberes", "Anchorage", "Ashdod", "Auckland",
+    "Balboa", "Bangkok", "Barcelona", "Bilbao", "Bremen/Bremerhaven", "Brisbane", "Buenos Aires", "Busan",
+    "Calcuta", "Callao", "Cartagena", "Chennai", "Chittagong", "Ciudad del Cabo", "Colombo", "Colón",
+    "Dakar", "Durban", "El Pireo", "Estambul", "Felixstowe", "Fremantle", "Gdansk", "Génova", "Gioia Tauro",
+    "Gotemburgo", "Guangzhou", "Guayaquil", "Haifa", "Halifax", "Hamburgo", "Ho Chi Minh", "Hong Kong",
+    "Honolulu", "Houston", "Incheon", "Jakarta", "Jebel Ali (Dubai)", "Jeddah", "Kaohsiung", "Karachi", "Kobe",
+    "La Spezia", "Laem Chabng", "Lagos", "Las Palmas", "Le Havre", "Lianyungang", "Lisboa", "Londres Gateway",
+    "Long Beach", "Los Angeles", "Manila", "Manzanillo (México)", "Marsella", "Melbourne", "Mersin", "Miami",
+    "Mombasa", "Montevideo", "Montreal", "Mundra", "Nagoya", "Nhava Sheva (Mumbai)", "Novorossiysk",
+    "Nueva York / Nueva Jersey", "Oakland", "Osaka", "Penang", "Port Klang", "Port Said", "Qingdao",
+    "Rotterdam", "Salalah", "San Antonio", "San Petersburgo", "Santos", "Savannah", "Seattle", "Shanghai",
+    "Sines", "Singapur", "Southampton", "Surabaya", "Sydney", "Tanger Med", "Tanjung Pelepas",
+    "Tanjung Priok (Yakarta)", "Tauranga", "Tenerife", "Tianjin", "Tokio", "Trieste", "Valencia",
     "Valparaíso", "Vancouver", "Veracruz", "Vigo", "Xiamen", "Yokohama"
 ]
 
@@ -245,21 +245,21 @@ entradas_usuario["'Interfaz'!F142"] = col_derrota.selectbox("Selector de Derrota
 if st.button("🗺️ Calcular Navegación", use_container_width=True):
     with st.spinner("Calculando distancias y tiempos de ruta..."):
         sol_nav = modelo.calculate(inputs=entradas_usuario)
-        st.session_state["resultados_nav"]["DRL"] = sol_nav["'Interfaz'!F139"].value[0, 0]
-        st.session_state["resultados_nav"]["TRL"] = sol_nav["'Interfaz'!F140"].value[0, 0]
-        st.session_state["resultados_nav"]["Ganancia"] = sol_nav["'Interfaz'!H140"].value[0, 0]
-        st.session_state["resultados_nav"]["DGC"] = sol_nav["'Interfaz'!J139"].value[0, 0]
-        st.session_state["resultados_nav"]["TGC"] = sol_nav["'Interfaz'!J140"].value[0, 0]
+        st.session_state["resultados_nav"]["DRL"]     = sol_nav["'Interfaz'!F139"].value[0, 0]
+        st.session_state["resultados_nav"]["TRL"]     = sol_nav["'Interfaz'!F140"].value[0, 0]
+        st.session_state["resultados_nav"]["Ganancia"]= sol_nav["'Interfaz'!H140"].value[0, 0]
+        st.session_state["resultados_nav"]["DGC"]     = sol_nav["'Interfaz'!J139"].value[0, 0]
+        st.session_state["resultados_nav"]["TGC"]     = sol_nav["'Interfaz'!J140"].value[0, 0]
 
 if st.session_state["resultados_nav"]["DRL"] is not None:
     st.success("Cálculo de navegación completado")
     rn1, rn2, rn3 = st.columns(3)
-    rn1.metric("D RL (Loxodrómica)", f"{st.session_state['resultados_nav']['DRL']:.2f} nm")
-    rn2.metric("T RL (días)", f"{st.session_state['resultados_nav']['TRL']:.2f}")
-    rn3.metric("Ganancia Loxo - Orto", f"{st.session_state['resultados_nav']['Ganancia']:.2f} nm")
+    rn1.metric("D RL (Loxodrómica)",      f"{st.session_state['resultados_nav']['DRL']:.2f} nm")
+    rn2.metric("T RL (días)",             f"{st.session_state['resultados_nav']['TRL']:.2f}")
+    rn3.metric("Ganancia Loxo - Orto",    f"{st.session_state['resultados_nav']['Ganancia']:.2f} nm")
     rg1, rg2, _ = st.columns(3)
-    rg1.metric("D GC (Ortodrómica)", f"{st.session_state['resultados_nav']['DGC']:.2f} nm")
-    rg2.metric("T GC (días)", f"{st.session_state['resultados_nav']['TGC']:.2f}")
+    rg1.metric("D GC (Ortodrómica)",      f"{st.session_state['resultados_nav']['DGC']:.2f} nm")
+    rg2.metric("T GC (días)",             f"{st.session_state['resultados_nav']['TGC']:.2f}")
 
 # =========================================================
 # SECCIÓN 11: CONDICIÓN ACT (RESULTADOS GLOBALES)
@@ -271,39 +271,62 @@ if st.button("🚀 CALCULAR CONDICIÓN ACTUAL (ACT)", type="primary", use_contai
     with st.spinner("Compilando matriz de estabilidad y calculando parámetros globales..."):
         sol_global = modelo.calculate(inputs=entradas_usuario)
         st.success("✅ Diagnóstico de Estabilidad ACT Completado.")
-        
+
+        # Extraer valores para evitar conflicto de comillas en f-strings
+        d_act      = sol_global["'Interfaz'!F115"].value[0, 0]
+        vcg_act    = sol_global["'Interfaz'!F116"].value[0, 0]
+        mv_act     = sol_global["'Interfaz'!F117"].value[0, 0]
+        lcg_act    = sol_global["'Interfaz'!F118"].value[0, 0]
+        ml_act     = sol_global["'Interfaz'!F119"].value[0, 0]
+        tcg_act    = sol_global["'Interfaz'!F120"].value[0, 0]
+        mt_act     = sol_global["'Interfaz'!F121"].value[0, 0]
+        trim_act   = sol_global["'Interfaz'!F122"].value[0, 0]
+        heel_act   = sol_global["'Interfaz'!F123"].value[0, 0]
+        fs_act     = sol_global["'Interfaz'!I115"].value[0, 0]
+        cmpr_act   = sol_global["'Interfaz'!I117"].value[0, 0]
+        cmm_act    = sol_global["'Interfaz'!I118"].value[0, 0]
+        cmpp_act   = sol_global["'Interfaz'!I119"].value[0, 0]
+        cpr_act    = sol_global["'Interfaz'!I121"].value[0, 0]
+        cm_act     = sol_global["'Interfaz'!I122"].value[0, 0]
+        cpp_act    = sol_global["'Interfaz'!I123"].value[0, 0]
+        gz30_act   = sol_global["'Interfaz'!L117"].value[0, 0]
+        a030_act   = sol_global["'Interfaz'!L118"].value[0, 0]
+        a040_act   = sol_global["'Interfaz'!L119"].value[0, 0]
+        a3040_act  = sol_global["'Interfaz'!L120"].value[0, 0]
+        gm_act     = sol_global["'Interfaz'!L121"].value[0, 0]
+
         st.markdown("### 📊 Datos Principales y Momentos")
         c1, c2, c3 = st.columns(3)
-        c1.metric("Desplazamiento ACT (F115)", f"{sol_global[\"'Interfaz'!F115\"].value[0,0]:.2f} Tm")
-        c2.metric("VCG (F116)", f"{sol_global[\"'Interfaz'!F116\"].value[0,0]:.3f} m")
-        c3.metric("Momento Vertical (F117)", f"{sol_global[\"'Interfaz'!F117\"].value[0,0]:.2f} Tm·m")
-        c1.metric("LCG (F118)", f"{sol_global[\"'Interfaz'!F118\"].value[0,0]:.3f} m")
-        c2.metric("Momento Longitudinal (F119)", f"{sol_global[\"'Interfaz'!F119\"].value[0,0]:.2f} Tm·m")
-        c3.metric("TCG (F120)", f"{sol_global[\"'Interfaz'!F120\"].value[0,0]:.3f} m")
-        c1.metric("Momento Transversal (F121)", f"{sol_global[\"'Interfaz'!F121\"].value[0,0]:.2f} Tm·m")
-        c2.metric("Asiento Final / Trim (F122)", f"{sol_global[\"'Interfaz'!F122\"].value[0,0]:.3f} m")
-        c3.metric("Escora Final / Heel (F123)", f"{sol_global[\"'Interfaz'!F123\"].value[0,0]:.2f} °")
+        c1.metric("Desplazamiento ACT (F115)",   f"{d_act:.2f} Tm")
+        c2.metric("VCG (F116)",                  f"{vcg_act:.3f} m")
+        c3.metric("Momento Vertical (F117)",     f"{mv_act:.2f} Tm·m")
+        c1.metric("LCG (F118)",                  f"{lcg_act:.3f} m")
+        c2.metric("Momento Longitudinal (F119)", f"{ml_act:.2f} Tm·m")
+        c3.metric("TCG (F120)",                  f"{tcg_act:.3f} m")
+        c1.metric("Momento Transversal (F121)",  f"{mt_act:.2f} Tm·m")
+        c2.metric("Asiento Final / Trim (F122)", f"{trim_act:.3f} m")
+        c3.metric("Escora Final / Heel (F123)",  f"{heel_act:.2f} °")
         st.divider()
-        
+
         st.markdown("### ⚓ Calados y Superficies Libres")
-        st.metric("Ángulo Escora por FS Φactsl (I115)", f"{sol_global[\"'Interfaz'!I115\"].value[0,0]:.2f} °")
+        st.metric("Ángulo Escora por FS Φactsl (I115)", f"{fs_act:.2f} °")
         cm1, cm2, cm3 = st.columns(3)
-        cm1.metric("CMpr (I117)", f"{sol_global[\"'Interfaz'!I117\"].value[0,0]:.3f}")
-        cm2.metric("CMm (I118)", f"{sol_global[\"'Interfaz'!I118\"].value[0,0]:.3f}")
-        cm3.metric("CMpp (I119)", f"{sol_global[\"'Interfaz'!I119\"].value[0,0]:.3f}")
+        cm1.metric("CMpr (I117)", f"{cmpr_act:.3f}")
+        cm2.metric("CMm (I118)",  f"{cmm_act:.3f}")
+        cm3.metric("CMpp (I119)", f"{cmpp_act:.3f}")
         cp1, cp2, cp3 = st.columns(3)
-        cp1.metric("Cpr (I121)", f"{sol_global[\"'Interfaz'!I121\"].value[0,0]:.3f}")
-        cp2.metric("Cm (I122)", f"{sol_global[\"'Interfaz'!I122\"].value[0,0]:.3f}")
-        cp3.metric("Cpp (I123)", f"{sol_global[\"'Interfaz'!I123\"].value[0,0]:.3f}")
+        cp1.metric("Cpr (I121)", f"{cpr_act:.3f}")
+        cp2.metric("Cm (I122)",  f"{cm_act:.3f}")
+        cp3.metric("Cpp (I123)", f"{cpp_act:.3f}")
         st.divider()
-        
+
         st.markdown("### 📈 Criterios de Estabilidad Intacta (Curva GZ)")
         gz1, gz2, gz3 = st.columns(3)
-        gz1.metric("GZ 30 (L117)", f"{sol_global[\"'Interfaz'!L117\"].value[0,0]:.3f} m")
-        gz2.metric("Área 0°-30° (L118)", f"{sol_global[\"'Interfaz'!L118\"].value[0,0]:.3f} m·rad")
-        gz3.metric("Área 0°-40° (L119)", f"{sol_global[\"'Interfaz'!L119\"].value[0,0]:.3f} m·rad")
-        gz1.metric("Área 30°-40° (L120)", f"{sol_global[\"'Interfaz'!L120\"].value[0,0]:.3f} m·rad")
-        gz2.metric("GM Fluido / Actual (L121)", f"{sol_global[\"'Interfaz'!L121\"].value[0,0]:.3f} m")
+        gz1.metric("GZ 30 (L117)",        f"{gz30_act:.3f} m")
+        gz2.metric("Área 0°-30° (L118)",  f"{a030_act:.3f} m·rad")
+        gz3.metric("Área 0°-40° (L119)",  f"{a040_act:.3f} m·rad")
+        gz1.metric("Área 30°-40° (L120)", f"{a3040_act:.3f} m·rad")
+        gz2.metric("GM Fluido / Actual (L121)", f"{gm_act:.3f} m")
 
 # =========================================================
 # SECCIÓN 12: CONSUMOS DIARIOS
@@ -311,12 +334,12 @@ if st.button("🚀 CALCULAR CONDICIÓN ACTUAL (ACT)", type="primary", use_contai
 st.markdown("---")
 st.header("12. Consumos Diarios")
 cd1, cd2, cd3, cd4, cd5, cd6 = st.columns(6)
-entradas_usuario["'Interfaz'!E150"] = cd1.number_input("CMOxd HFO", value=0.0, format="%.2f", key="cmo_hfo")
-entradas_usuario["'Interfaz'!F150"] = cd2.number_input("CMOxd DO", value=0.0, format="%.2f", key="cmo_do")
-entradas_usuario["'Interfaz'!G150"] = cd3.number_input("CMOxd LO", value=0.0, format="%.2f", key="cmo_lo")
+entradas_usuario["'Interfaz'!E150"] = cd1.number_input("CMOxd HFO",    value=0.0, format="%.2f", key="cmo_hfo")
+entradas_usuario["'Interfaz'!F150"] = cd2.number_input("CMOxd DO",     value=0.0, format="%.2f", key="cmo_do")
+entradas_usuario["'Interfaz'!G150"] = cd3.number_input("CMOxd LO",     value=0.0, format="%.2f", key="cmo_lo")
 entradas_usuario["'Interfaz'!H150"] = cd4.number_input("CMOxd Misc.O", value=0.0, format="%.2f", key="cmo_misco")
 entradas_usuario["'Interfaz'!I150"] = cd5.number_input("CMOxd Misc.W", value=0.0, format="%.2f", key="cmo_miscw")
-entradas_usuario["'Interfaz'!J150"] = cd6.number_input("CMOxd FW", value=0.0, format="%.2f", key="cmo_fw")
+entradas_usuario["'Interfaz'!J150"] = cd6.number_input("CMOxd FW",     value=0.0, format="%.2f", key="cmo_fw")
 
 # =========================================================
 # SECCIÓN 13: D MÁXIMOS
@@ -325,23 +348,24 @@ st.markdown("---")
 st.header("13. D Máximos (Líneas de Carga)")
 col_sal, col_cambio, col_lleg = st.columns(3)
 
-zonas_carga = ["TF", "F", "T", "S", "W"]
+zonas_carga    = ["TF", "F", "T", "S", "W"]
 opciones_aplica = ["Aplica", "No Aplica"]
 
 with col_sal:
     st.subheader("D Salida")
     entradas_usuario["'Interfaz'!G157"] = st.selectbox("D zona Sal", zonas_carga, key="d_zona_sal")
     c1, c2 = st.columns(2)
-    c_max_sal = c1.number_input("C max Sal", value=0.00, format="%.2f", key="c_max_sal")
+    c_max_sal  = c1.number_input("C max Sal", value=0.00, format="%.2f", key="c_max_sal")
     aplica_sal = c2.selectbox("Aplica/No", opciones_aplica, key="aplica_sal", label_visibility="collapsed")
     entradas_usuario["'Interfaz'!G158"] = aplica_sal
-    if aplica_sal == "Aplica": entradas_usuario["'Interfaz'!F158"] = c_max_sal
+    if aplica_sal == "Aplica":
+        entradas_usuario["'Interfaz'!F158"] = c_max_sal
     entradas_usuario["'Interfaz'!F159"] = st.number_input("d Salida", value=1.025, format="%.4f", key="d_salida_dens")
 
 with col_cambio:
     st.subheader("Cambio a Zona de LLEG")
     c1, c2, c3 = st.columns(3)
-    entradas_usuario["'Interfaz'!I158"] = c1.number_input("Grados", value=0, step=1, key="gr_cambio", label_visibility="collapsed")
+    entradas_usuario["'Interfaz'!I158"] = c1.number_input("Grados",  value=0, step=1, key="gr_cambio",  label_visibility="collapsed")
     entradas_usuario["'Interfaz'!J158"] = c2.number_input("Minutos", value=0, step=1, key="min_cambio", label_visibility="collapsed")
     entradas_usuario["'Interfaz'!K158"] = c3.selectbox("N/S", ["N", "S"], key="ns_cambio", label_visibility="collapsed")
     entradas_usuario["'Interfaz'!J162"] = st.selectbox("Derrota Cambio", ["GC", "RL"], key="derrota_cambio")
@@ -350,21 +374,22 @@ with col_lleg:
     st.subheader("D LLEGADA")
     entradas_usuario["'Interfaz'!O157"] = st.selectbox("D zona Lleg", zonas_carga, key="d_zona_lleg")
     c1, c2 = st.columns(2)
-    c_max_lleg = c1.number_input("C max Lleg", value=0.00, format="%.2f", key="c_max_lleg")
+    c_max_lleg  = c1.number_input("C max Lleg", value=0.00, format="%.2f", key="c_max_lleg")
     aplica_lleg = c2.selectbox("Aplica/No ", opciones_aplica, key="aplica_lleg", label_visibility="collapsed")
     entradas_usuario["'Interfaz'!O158"] = aplica_lleg
-    if aplica_lleg == "Aplica": entradas_usuario["'Interfaz'!N158"] = c_max_lleg
+    if aplica_lleg == "Aplica":
+        entradas_usuario["'Interfaz'!N158"] = c_max_lleg
     entradas_usuario["'Interfaz'!N159"] = st.number_input("d Llegada", value=1.025, format="%.4f", key="d_lleg_dens")
 
 if st.button("⚖️ Calcular Calados Máximos", use_container_width=True):
     with st.spinner("Calculando..."):
         sol_dmax = modelo.calculate(inputs=entradas_usuario)
-        st.session_state["resultados_dmax"]["S_Sal"] = sol_dmax["'Interfaz'!F161"].value[0, 0]
+        st.session_state["resultados_dmax"]["S_Sal"]  = sol_dmax["'Interfaz'!F161"].value[0, 0]
         st.session_state["resultados_dmax"]["D_Lleg"] = sol_dmax["'Interfaz'!N161"].value[0, 0]
 
 if st.session_state["resultados_dmax"]["S_Sal"] is not None:
     rm1, rm2 = st.columns(2)
-    rm1.metric("S Sal", f"{st.session_state['resultados_dmax']['S_Sal']:.3f} m")
+    rm1.metric("S Sal",  f"{st.session_state['resultados_dmax']['S_Sal']:.3f} m")
     rm2.metric("D Lleg", f"{st.session_state['resultados_dmax']['D_Lleg']:.3f} m")
 
 # =========================================================
@@ -383,10 +408,10 @@ for i in range(5):
     fila = 173 + i
     cols = st.columns([1, 1, 1, 1.3, 1, 1, 1, 1, 1, 1, 1.2])
     cols[0].markdown(f"<div style='padding-top: 10px;'><b>B{i+1}</b></div>", unsafe_allow_html=True)
-    
+
     ph_act_list.append(cols[1].empty())
     ph_pact_list.append(cols[2].empty())
-    
+
     f_val = cols[3].selectbox(f"H{fila}", ["", "Full", "Slack", "Vacio"], key=f"H{fila}_carga", label_visibility="collapsed")
     i_val = cols[4].number_input(f"I{fila}", value=0.00, key=f"I{fila}_carga", label_visibility="collapsed")
     j_val = cols[5].selectbox(f"J{fila}", ["", "Tm", "LT", "ft3", "m3"], key=f"J{fila}_carga", label_visibility="collapsed")
@@ -395,15 +420,17 @@ for i in range(5):
     m_val = cols[8].selectbox(f"M{fila}", ["Tm", "LT", "m3", "ft3"], key=f"M{fila}_carga", label_visibility="collapsed")
     n_val = cols[9].selectbox(f"N{fila}", ["Tm", "LT", "m3", "ft3"], key=f"N{fila}_carga", label_visibility="collapsed")
     ph_sal_list.append(cols[10].empty())
-    
-    if f_val != "": entradas_usuario[f"'Interfaz'!H{fila}"] = f_val
+
+    if f_val != "":
+        entradas_usuario[f"'Interfaz'!H{fila}"] = f_val
     entradas_usuario[f"'Interfaz'!I{fila}"] = i_val
-    if j_val != "": entradas_usuario[f"'Interfaz'!J{fila}"] = j_val
+    if j_val != "":
+        entradas_usuario[f"'Interfaz'!J{fila}"] = j_val
     entradas_usuario[f"'Interfaz'!K{fila}"] = k_val
     entradas_usuario[f"'Interfaz'!L{fila}"] = l_val
     entradas_usuario[f"'Interfaz'!M{fila}"] = m_val
     entradas_usuario[f"'Interfaz'!N{fila}"] = n_val
-    
+
     if st.session_state["resultados_carga"][fila]["ACT"] is not None:
         ph_act_list[i].markdown(f"{st.session_state['resultados_carga'][fila]['ACT']:.2f}")
         ph_pact_list[i].markdown(f"{st.session_state['resultados_carga'][fila]['%ACT']:.2f}%")
@@ -414,9 +441,9 @@ if st.button("⚖️ Calcular Carga", use_container_width=True):
         sol_carga = modelo.calculate(inputs=entradas_usuario)
         for i in range(5):
             fila = 173 + i
-            st.session_state["resultados_carga"][fila]["ACT"] = sol_carga[f"'Interfaz'!F{fila}"].value[0, 0]
+            st.session_state["resultados_carga"][fila]["ACT"]  = sol_carga[f"'Interfaz'!F{fila}"].value[0, 0]
             st.session_state["resultados_carga"][fila]["%ACT"] = sol_carga[f"'Interfaz'!G{fila}"].value[0, 0]
-            st.session_state["resultados_carga"][fila]["SAL"] = sol_carga[f"'Interfaz'!O{fila}"].value[0, 0]
+            st.session_state["resultados_carga"][fila]["SAL"]  = sol_carga[f"'Interfaz'!O{fila}"].value[0, 0]
             ph_act_list[i].markdown(f"{st.session_state['resultados_carga'][fila]['ACT']:.2f}")
             ph_pact_list[i].markdown(f"{st.session_state['resultados_carga'][fila]['%ACT']:.2f}%")
             ph_sal_list[i].success(f"{st.session_state['resultados_carga'][fila]['SAL']:.2f}")
@@ -441,11 +468,12 @@ with col_hfo:
         t_hfo = cx[0].selectbox(f"E{fila}", op_hfo, key=f"E{fila}_dist", label_visibility="collapsed")
         d_hfo = cx[1].number_input(f"F{fila}", value=None, format="%.2f", key=f"F{fila}_dist", label_visibility="collapsed")
         ph_dr = cx[2].empty()
-        
+
         if t_hfo != "":
             entradas_usuario[f"'Interfaz'!E{fila}"] = t_hfo
-            if d_hfo is not None: entradas_usuario[f"'Interfaz'!F{fila}"] = d_hfo
-                
+            if d_hfo is not None:
+                entradas_usuario[f"'Interfaz'!F{fila}"] = d_hfo
+
         with cx[3]:
             if st.button("Calc.", key=f"btn_hfo_{fila}"):
                 if t_hfo != "" and d_hfo is not None:
@@ -466,11 +494,12 @@ with col_do:
         t_do = dx[0].selectbox(f"I{fila}", op_do, key=f"I{fila}_dist", label_visibility="collapsed")
         d_do = dx[1].number_input(f"J{fila}", value=None, format="%.2f", key=f"J{fila}_dist", label_visibility="collapsed")
         ph_dd = dx[2].empty()
-        
+
         if t_do != "":
             entradas_usuario[f"'Interfaz'!I{fila}"] = t_do
-            if d_do is not None: entradas_usuario[f"'Interfaz'!J{fila}"] = d_do
-                
+            if d_do is not None:
+                entradas_usuario[f"'Interfaz'!J{fila}"] = d_do
+
         with dx[3]:
             if st.button("Calc.", key=f"btn_do_{fila}"):
                 if t_do != "" and d_do is not None:
@@ -491,15 +520,16 @@ with col_rep1:
     opciones_bodegas = ["", "B1", "B2", "B3", "B4", "B5"]
     cr = st.columns([1, 1.5, 1.5, 1, 1])
     cr[0].markdown("**Bodega**"); cr[1].markdown("**A Repartir en: (G)**"); cr[2].markdown("**Fe (H)**"); cr[3].markdown("**Und 1 (I)**"); cr[4].markdown("**Und 2 (J)**")
-    
+
     for i in range(5):
         fila = 281 + i
         cols = st.columns([1, 1.5, 1.5, 1, 1])
         cols[0].markdown(f"<div style='padding-top: 10px;'><b>B{i+1}</b></div>", unsafe_allow_html=True)
-        
+
         rep_bod = cols[1].selectbox(f"G{fila}", opciones_bodegas, key=f"G{fila}_rep", label_visibility="collapsed")
-        if rep_bod != "": entradas_usuario[f"'Interfaz'!G{fila}"] = rep_bod
-            
+        if rep_bod != "":
+            entradas_usuario[f"'Interfaz'!G{fila}"] = rep_bod
+
         entradas_usuario[f"'Interfaz'!H{fila}"] = cols[2].number_input(f"H{fila}", value=0.00, key=f"H{fila}_rep", label_visibility="collapsed")
         entradas_usuario[f"'Interfaz'!I{fila}"] = cols[3].selectbox(f"I{fila}", ["Tm", "LT", "m3", "ft3"], key=f"I{fila}_rep", label_visibility="collapsed")
         entradas_usuario[f"'Interfaz'!J{fila}"] = cols[4].selectbox(f"J{fila}", ["Tm", "LT", "m3", "ft3"], key=f"J{fila}_rep", label_visibility="collapsed")
@@ -507,11 +537,13 @@ with col_rep1:
 with col_rep2:
     st.subheader("Asiento Deseado")
     tipo_asiento = st.selectbox("Parámetro (E293)", ["", "CMpr =", "CMm =", "CMpp =", "A =", "a ="], key="e293_rep")
-    if tipo_asiento != "": entradas_usuario["'Interfaz'!E293"] = tipo_asiento
-        
+    if tipo_asiento != "":
+        entradas_usuario["'Interfaz'!E293"] = tipo_asiento
+
     valor_asiento = st.number_input("Valor (F293)", value=None, format="%.3f", key="f293_rep")
-    if valor_asiento is not None: entradas_usuario["'Interfaz'!F293"] = valor_asiento
-        
+    if valor_asiento is not None:
+        entradas_usuario["'Interfaz'!F293"] = valor_asiento
+
     entradas_usuario["'Interfaz'!G293"] = st.selectbox("Condición (G293)", ["Apopante", "Aproante", "Aguas Iguales"], key="g293_rep")
 
 if st.button("🔄 Registrar Reparto", use_container_width=True):
@@ -529,39 +561,62 @@ if st.button("🚢 CALCULAR CONDICIÓN SALIDA", type="primary", use_container_wi
     with st.spinner("Calculando parámetros de salida..."):
         sol_sal = modelo.calculate(inputs=entradas_usuario)
         st.success("✅ Diagnóstico de Salida Completado.")
-        
+
+        # Extraer valores para evitar conflicto de comillas en f-strings
+        d_sal      = sol_sal["'Interfaz'!F298"].value[0, 0]
+        vcg_sal    = sol_sal["'Interfaz'!F299"].value[0, 0]
+        mv_sal     = sol_sal["'Interfaz'!F300"].value[0, 0]
+        lcg_sal    = sol_sal["'Interfaz'!F301"].value[0, 0]
+        ml_sal     = sol_sal["'Interfaz'!F302"].value[0, 0]
+        tcg_sal    = sol_sal["'Interfaz'!F303"].value[0, 0]
+        mt_sal     = sol_sal["'Interfaz'!F304"].value[0, 0]
+        trim_sal   = sol_sal["'Interfaz'!F305"].value[0, 0]
+        heel_sal   = sol_sal["'Interfaz'!F306"].value[0, 0]
+        fs_sal     = sol_sal["'Interfaz'!I298"].value[0, 0]
+        cmpr_sal   = sol_sal["'Interfaz'!I300"].value[0, 0]
+        cmm_sal    = sol_sal["'Interfaz'!I301"].value[0, 0]
+        cmpp_sal   = sol_sal["'Interfaz'!I302"].value[0, 0]
+        cpr_sal    = sol_sal["'Interfaz'!I304"].value[0, 0]
+        cm_sal     = sol_sal["'Interfaz'!I305"].value[0, 0]
+        cpp_sal    = sol_sal["'Interfaz'!I306"].value[0, 0]
+        gz30_sal   = sol_sal["'Interfaz'!L300"].value[0, 0]
+        a030_sal   = sol_sal["'Interfaz'!L301"].value[0, 0]
+        a040_sal   = sol_sal["'Interfaz'!L302"].value[0, 0]
+        a3040_sal  = sol_sal["'Interfaz'!L303"].value[0, 0]
+        gm_sal     = sol_sal["'Interfaz'!L304"].value[0, 0]
+
         st.markdown("### 📊 Datos Principales y Momentos")
         c1, c2, c3 = st.columns(3)
-        c1.metric("Desplazamiento SAL (F298)", f"{sol_sal[\"'Interfaz'!F298\"].value[0,0]:.2f} Tm")
-        c2.metric("VCG (F299)", f"{sol_sal[\"'Interfaz'!F299\"].value[0,0]:.3f} m")
-        c3.metric("Momento Vertical (F300)", f"{sol_sal[\"'Interfaz'!F300\"].value[0,0]:.2f} Tm·m")
-        c1.metric("LCG (F301)", f"{sol_sal[\"'Interfaz'!F301\"].value[0,0]:.3f} m")
-        c2.metric("Momento Longitudinal (F302)", f"{sol_sal[\"'Interfaz'!F302\"].value[0,0]:.2f} Tm·m")
-        c3.metric("TCG (F303)", f"{sol_sal[\"'Interfaz'!F303\"].value[0,0]:.3f} m")
-        c1.metric("Momento Transversal (F304)", f"{sol_sal[\"'Interfaz'!F304\"].value[0,0]:.2f} Tm·m")
-        c2.metric("Asiento Final / Trim (F305)", f"{sol_sal[\"'Interfaz'!F305\"].value[0,0]:.3f} m")
-        c3.metric("Escora Final / Heel (F306)", f"{sol_sal[\"'Interfaz'!F306\"].value[0,0]:.2f} °")
+        c1.metric("Desplazamiento SAL (F298)",   f"{d_sal:.2f} Tm")
+        c2.metric("VCG (F299)",                  f"{vcg_sal:.3f} m")
+        c3.metric("Momento Vertical (F300)",     f"{mv_sal:.2f} Tm·m")
+        c1.metric("LCG (F301)",                  f"{lcg_sal:.3f} m")
+        c2.metric("Momento Longitudinal (F302)", f"{ml_sal:.2f} Tm·m")
+        c3.metric("TCG (F303)",                  f"{tcg_sal:.3f} m")
+        c1.metric("Momento Transversal (F304)",  f"{mt_sal:.2f} Tm·m")
+        c2.metric("Asiento Final / Trim (F305)", f"{trim_sal:.3f} m")
+        c3.metric("Escora Final / Heel (F306)",  f"{heel_sal:.2f} °")
         st.divider()
-        
+
         st.markdown("### ⚓ Calados y Superficies Libres")
-        st.metric("Ángulo Escora por FS Φsalsl (I298)", f"{sol_sal[\"'Interfaz'!I298\"].value[0,0]:.2f} °")
+        st.metric("Ángulo Escora por FS Φsalsl (I298)", f"{fs_sal:.2f} °")
         cm1, cm2, cm3 = st.columns(3)
-        cm1.metric("CMpr (I300)", f"{sol_sal[\"'Interfaz'!I300\"].value[0,0]:.3f}")
-        cm2.metric("CMm (I301)", f"{sol_sal[\"'Interfaz'!I301\"].value[0,0]:.3f}")
-        cm3.metric("CMpp (I302)", f"{sol_sal[\"'Interfaz'!I302\"].value[0,0]:.3f}")
+        cm1.metric("CMpr (I300)", f"{cmpr_sal:.3f}")
+        cm2.metric("CMm (I301)",  f"{cmm_sal:.3f}")
+        cm3.metric("CMpp (I302)", f"{cmpp_sal:.3f}")
         cp1, cp2, cp3 = st.columns(3)
-        cp1.metric("Cpr (I304)", f"{sol_sal[\"'Interfaz'!I304\"].value[0,0]:.3f}")
-        cp2.metric("Cm (I305)", f"{sol_sal[\"'Interfaz'!I305\"].value[0,0]:.3f}")
-        cp3.metric("Cpp (I306)", f"{sol_sal[\"'Interfaz'!I306\"].value[0,0]:.3f}")
+        cp1.metric("Cpr (I304)", f"{cpr_sal:.3f}")
+        cp2.metric("Cm (I305)",  f"{cm_sal:.3f}")
+        cp3.metric("Cpp (I306)", f"{cpp_sal:.3f}")
         st.divider()
-        
+
         st.markdown("### 📈 Criterios de Estabilidad Intacta (Curva GZ)")
         gz1, gz2, gz3 = st.columns(3)
-        gz1.metric("GZ 30 (L300)", f"{sol_sal[\"'Interfaz'!L300\"].value[0,0]:.3f} m")
-        gz2.metric("Área 0°-30° (L301)", f"{sol_sal[\"'Interfaz'!L301\"].value[0,0]:.3f} m·rad")
-        gz3.metric("Área 0°-40° (L302)", f"{sol_sal[\"'Interfaz'!L302\"].value[0,0]:.3f} m·rad")
-        gz1.metric("Área 30°-40° (L303)", f"{sol_sal[\"'Interfaz'!L303\"].value[0,0]:.3f} m·rad")
-        gz2.metric("GM Fluido / Actual (L304)", f"{sol_sal[\"'Interfaz'!L304\"].value[0,0]:.3f} m")
+        gz1.metric("GZ 30 (L300)",        f"{gz30_sal:.3f} m")
+        gz2.metric("Área 0°-30° (L301)",  f"{a030_sal:.3f} m·rad")
+        gz3.metric("Área 0°-40° (L302)",  f"{a040_sal:.3f} m·rad")
+        gz1.metric("Área 30°-40° (L303)", f"{a3040_sal:.3f} m·rad")
+        gz2.metric("GM Fluido / Actual (L304)", f"{gm_sal:.3f} m")
 
 # =========================================================
 # SECCIÓN 18: CONDICIÓN LLEG (RESULTADOS LLEGADA)
@@ -573,39 +628,62 @@ if st.button("🏁 CALCULAR CONDICIÓN LLEGADA", type="primary", use_container_w
     with st.spinner("Calculando parámetros de llegada..."):
         sol_lleg = modelo.calculate(inputs=entradas_usuario)
         st.success("✅ Diagnóstico de Llegada Completado.")
-        
+
+        # Extraer valores para evitar conflicto de comillas en f-strings
+        d_lleg     = sol_lleg["'Interfaz'!F312"].value[0, 0]
+        vcg_lleg   = sol_lleg["'Interfaz'!F313"].value[0, 0]
+        mv_lleg    = sol_lleg["'Interfaz'!F314"].value[0, 0]
+        lcg_lleg   = sol_lleg["'Interfaz'!F315"].value[0, 0]
+        ml_lleg    = sol_lleg["'Interfaz'!F316"].value[0, 0]
+        tcg_lleg   = sol_lleg["'Interfaz'!F317"].value[0, 0]
+        mt_lleg    = sol_lleg["'Interfaz'!F318"].value[0, 0]
+        trim_lleg  = sol_lleg["'Interfaz'!F319"].value[0, 0]
+        heel_lleg  = sol_lleg["'Interfaz'!F320"].value[0, 0]
+        fs_lleg    = sol_lleg["'Interfaz'!I312"].value[0, 0]
+        cmpr_lleg  = sol_lleg["'Interfaz'!I314"].value[0, 0]
+        cmm_lleg   = sol_lleg["'Interfaz'!I315"].value[0, 0]
+        cmpp_lleg  = sol_lleg["'Interfaz'!I316"].value[0, 0]
+        cpr_lleg   = sol_lleg["'Interfaz'!I318"].value[0, 0]
+        cm_lleg    = sol_lleg["'Interfaz'!I319"].value[0, 0]
+        cpp_lleg   = sol_lleg["'Interfaz'!I320"].value[0, 0]
+        gz30_lleg  = sol_lleg["'Interfaz'!L314"].value[0, 0]
+        a030_lleg  = sol_lleg["'Interfaz'!L315"].value[0, 0]
+        a040_lleg  = sol_lleg["'Interfaz'!L316"].value[0, 0]
+        a3040_lleg = sol_lleg["'Interfaz'!L317"].value[0, 0]
+        gm_lleg    = sol_lleg["'Interfaz'!L318"].value[0, 0]
+
         st.markdown("### 📊 Datos Principales y Momentos")
         c1, c2, c3 = st.columns(3)
-        c1.metric("Desplazamiento LLEG (F312)", f"{sol_lleg[\"'Interfaz'!F312\"].value[0,0]:.2f} Tm")
-        c2.metric("VCG (F313)", f"{sol_lleg[\"'Interfaz'!F313\"].value[0,0]:.3f} m")
-        c3.metric("Momento Vertical (F314)", f"{sol_lleg[\"'Interfaz'!F314\"].value[0,0]:.2f} Tm·m")
-        c1.metric("LCG (F315)", f"{sol_lleg[\"'Interfaz'!F315\"].value[0,0]:.3f} m")
-        c2.metric("Momento Longitudinal (F316)", f"{sol_lleg[\"'Interfaz'!F316\"].value[0,0]:.2f} Tm·m")
-        c3.metric("TCG (F317)", f"{sol_lleg[\"'Interfaz'!F317\"].value[0,0]:.3f} m")
-        c1.metric("Momento Transversal (F318)", f"{sol_lleg[\"'Interfaz'!F318\"].value[0,0]:.2f} Tm·m")
-        c2.metric("Asiento Final / Trim (F319)", f"{sol_lleg[\"'Interfaz'!F319\"].value[0,0]:.3f} m")
-        c3.metric("Escora Final / Heel (F320)", f"{sol_lleg[\"'Interfaz'!F320\"].value[0,0]:.2f} °")
+        c1.metric("Desplazamiento LLEG (F312)",  f"{d_lleg:.2f} Tm")
+        c2.metric("VCG (F313)",                  f"{vcg_lleg:.3f} m")
+        c3.metric("Momento Vertical (F314)",     f"{mv_lleg:.2f} Tm·m")
+        c1.metric("LCG (F315)",                  f"{lcg_lleg:.3f} m")
+        c2.metric("Momento Longitudinal (F316)", f"{ml_lleg:.2f} Tm·m")
+        c3.metric("TCG (F317)",                  f"{tcg_lleg:.3f} m")
+        c1.metric("Momento Transversal (F318)",  f"{mt_lleg:.2f} Tm·m")
+        c2.metric("Asiento Final / Trim (F319)", f"{trim_lleg:.3f} m")
+        c3.metric("Escora Final / Heel (F320)",  f"{heel_lleg:.2f} °")
         st.divider()
-        
+
         st.markdown("### ⚓ Calados y Superficies Libres")
-        st.metric("Ángulo Escora por FS Φllegsl (I312)", f"{sol_lleg[\"'Interfaz'!I312\"].value[0,0]:.2f} °")
+        st.metric("Ángulo Escora por FS Φllegsl (I312)", f"{fs_lleg:.2f} °")
         cm1, cm2, cm3 = st.columns(3)
-        cm1.metric("CMpr (I314)", f"{sol_lleg[\"'Interfaz'!I314\"].value[0,0]:.3f}")
-        cm2.metric("CMm (I315)", f"{sol_lleg[\"'Interfaz'!I315\"].value[0,0]:.3f}")
-        cm3.metric("CMpp (I316)", f"{sol_lleg[\"'Interfaz'!I316\"].value[0,0]:.3f}")
+        cm1.metric("CMpr (I314)", f"{cmpr_lleg:.3f}")
+        cm2.metric("CMm (I315)",  f"{cmm_lleg:.3f}")
+        cm3.metric("CMpp (I316)", f"{cmpp_lleg:.3f}")
         cp1, cp2, cp3 = st.columns(3)
-        cp1.metric("Cpr (I318)", f"{sol_lleg[\"'Interfaz'!I318\"].value[0,0]:.3f}")
-        cp2.metric("Cm (I319)", f"{sol_lleg[\"'Interfaz'!I319\"].value[0,0]:.3f}")
-        cp3.metric("Cpp (I320)", f"{sol_lleg[\"'Interfaz'!I320\"].value[0,0]:.3f}")
+        cp1.metric("Cpr (I318)", f"{cpr_lleg:.3f}")
+        cp2.metric("Cm (I319)",  f"{cm_lleg:.3f}")
+        cp3.metric("Cpp (I320)", f"{cpp_lleg:.3f}")
         st.divider()
-        
+
         st.markdown("### 📈 Criterios de Estabilidad Intacta (Curva GZ)")
         gz1, gz2, gz3 = st.columns(3)
-        gz1.metric("GZ 30 (L314)", f"{sol_lleg[\"'Interfaz'!L314\"].value[0,0]:.3f} m")
-        gz2.metric("Área 0°-30° (L315)", f"{sol_lleg[\"'Interfaz'!L315\"].value[0,0]:.3f} m·rad")
-        gz3.metric("Área 0°-40° (L316)", f"{sol_lleg[\"'Interfaz'!L316\"].value[0,0]:.3f} m·rad")
-        gz1.metric("Área 30°-40° (L317)", f"{sol_lleg[\"'Interfaz'!L317\"].value[0,0]:.3f} m·rad")
-        gz2.metric("GM Fluido / Actual (L318)", f"{sol_lleg[\"'Interfaz'!L318\"].value[0,0]:.3f} m")
+        gz1.metric("GZ 30 (L314)",        f"{gz30_lleg:.3f} m")
+        gz2.metric("Área 0°-30° (L315)",  f"{a030_lleg:.3f} m·rad")
+        gz3.metric("Área 0°-40° (L316)",  f"{a040_lleg:.3f} m·rad")
+        gz1.metric("Área 30°-40° (L317)", f"{a3040_lleg:.3f} m·rad")
+        gz2.metric("GM Fluido / Actual (L318)", f"{gm_lleg:.3f} m")
 
 st.markdown("---")
 st.markdown("<div style='text-align: center; color: grey;'>Desarrollado para el TFG: Modelado y Resolución de Situaciones Críticas - B/C Cormorán</div>", unsafe_allow_html=True)
